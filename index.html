@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./public/assets/frameworks/bootstrap.min.css">
+    <title>Jeux du pendu</title>
+</head>
+<body>
+<main>
+    <div class="container" id="myGame">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-6 text-center">
+                <h1>Jeux du Pendu</h1>
+                <p>Mot à deviner :</p>
+                <h2 id="guess-word"></h2>
+
+                <div class="mb-3 text-center">
+                    <label for="letter-input" class="form-label">Entrer une lettre</label>
+                    <input type="text" class="form-control" id="letter-input">
+                </div>
+                <div class="text-center mb-3">
+                    <button type="submit" id="guess-btn" class="btn btn-primary">Submit</button>
+                </div>
+
+                <h5 id="letterErreur" class="d-none">Erreur : </h5>
+
+                <h3 id="win" class="d-none">BRAVO !</h3>
+                <h3 id="loose" class="d-none">PERDU !</h3>
+
+            </div>
+        </div>
+    </div>
+</main>
+
+
+
+
+
+
+
+
+
+
+
+<!-- Script JS Bootstrap -->
+<script src="./public/assets/frameworks/bootstrap.min.js"></script>
+<!-- Script JS -->
+<script src="./public/assets/js/script.js"></script>
+</body>
+</html>
