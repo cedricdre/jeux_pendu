@@ -3,46 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- icon bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- Typo -->
+    <link href="https://fonts.googleapis.com/css2?family=Gluten:wght@400;700;900&display=swap" rel="stylesheet">
+    <!-- Styles css Bootstrap -->
     <link rel="stylesheet" href="./public/assets/frameworks/bootstrap.min.css">
-    <title>Jeux du pendu</title>
+    <link rel="stylesheet" href="https://bootswatch.com/5/lumen/bootstrap.min.css">
+    <!-- Styles css -->
+    <link rel="stylesheet" href="./public/assets/css/style.css">
+    <title>Jeu du pendu</title>
 </head>
 <body>
 <main>
-    <div class="container" id="myGame">
-        <div class="row justify-content-center">
-            <div class="col-12 col-md-6 text-center">
-                <h1>Jeux du Pendu</h1>
-                <p>Mot à deviner :</p>
-                <h2 id="guess-word"></h2>
-
-                <div class="mb-3 text-center">
-                    <label for="letter-input" class="form-label">Entrer une lettre</label>
-                    <input type="text" class="form-control" id="letter-input">
+    <div class="container my-2 my-md-5" id="myGame">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-12 col-md-6 col-lg-5 text-center">
+                <h1 class="gluten-900 ">Jeu du Pendu</h1>
+                <button type="submit" id="newGameBtn" class="btn btn-pink btn-sm mb-2 mb-md-5">Nouvelle partie</button>
+                <h5 class="gluten-400">Mot à deviner :</h5>
+                <h2 class="mb-1 mb-md-4 bg-white rounded-3 p-2 p-md-4 gluten-700 text-uppercase h1" id="guess-word">
+                    <!-- Affichage du mot à trouver -->
+                </h2>
+                <div id="formLetter" class="row g-1 justify-content-center my-2 my-md-4">
+                    <label for="letter-input" class="form-label text-center h5 gluten-900">Entrer une lettre</label>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-lg border-primary border-2" id="letter-input" maxlength="1">
+                    </div>
+                    <div class="col-auto">
+                        <button type="submit" id="guess-btn" class="btn btn-primary btn-lg">Valider la lettre</button>
+                    </div>
                 </div>
-                <div class="text-center mb-3">
-                    <button type="submit" id="guess-btn" class="btn btn-primary">Submit</button>
-                </div>
-
-                <h5 id="letterErreur" class="d-none">Erreur : </h5>
-
-                <h3 id="win" class="d-none">BRAVO !</h3>
-                <h3 id="loose" class="d-none">PERDU !</h3>
-
+                <!-- Message quand la partie est gagné -->
+                <h3 id="win" class="d-none gluten-900 text-pink h2">Félicitation ! Tu as gagné !</h3>
+                <!-- Message quand la partie est perdu -->
+                <h3 id="lose" class="d-none gluten-900 text-danger h2 mb-0">Tu as PERDU !</h3>
+                <h5 id="word-secret" class="gluten-400 mb-3"></h5>
+                
+                <!-- compteur d'essai -->
+                <h5 class="gluten-400">Il te reste <span id="count" class="fw-bold gluten-900"></span> essai(s)</h5>
+                <!-- Affichage lettres éronnées -->
+                <h4 id="letterErreur" class="text-danger"></h4>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4 text-center">
+                <!-- Affichage de l'image selon le script -->
+                <img id="error-img" class="error-img img-fluid" src="">
+            </div>
+            <!-- Historique -->
+            <div class="col-12 text-center mt-5">
+                <h5 class="gluten-700">Historique des victoires</h5>
+                <p id="victory"></p>
             </div>
         </div>
     </div>
 </main>
-
-
-
-
-
-
-
-
-
-
-
+<footer>
+</footer>
 <!-- Script JS Bootstrap -->
 <script src="./public/assets/frameworks/bootstrap.min.js"></script>
 <!-- Script JS -->

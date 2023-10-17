@@ -1,0 +1,62 @@
+body {
+    color: #36276B;
+    background-image: url('../img/fond-body.jpg');
+    background-position: top;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.gluten-900 { 
+    font-family: 'Gluten', cursive;
+    font-weight: 900;
+}
+.gluten-700 {
+    font-family: 'Gluten', cursive;
+    font-weight: 700;
+}
+.gluten-400 {
+    font-family: 'Gluten', cursive;
+    font-weight: 400;
+}
+.btn-pink {
+    border-color: #D146A6;
+--bs-btn-color: #fff;
+--bs-btn-bg: #FD45C5;
+--bs-btn-border-color: #FD45C5;
+--bs-btn-hover-color: #fff;
+--bs-btn-hover-bg: #D146A6;
+--bs-btn-hover-border-color: #D146A6;
+--bs-btn-active-color: #fff;
+--bs-btn-active-bg: #D146A6;
+--bs-btn-active-border-color: #D146A6;
+--bs-btn-disabled-color: #fff;
+--bs-btn-disabled-bg: #FD45C5;
+--bs-btn-disabled-border-color: #FD45C5;
+}
+.text-purple {
+    color: #36276B;
+}
+.text-pink {
+    color: #FD45C5;
+}
+
+
+
+
+
+
+/* .btn-outline-pink {
+--bs-btn-color: #FD45C5;
+--bs-btn-border-color: #FD45C5;
+--bs-btn-hover-color: #fff;
+--bs-btn-hover-bg: #FD45C5;
+--bs-btn-hover-border-color: #FD45C5;
+--bs-btn-focus-shadow-rgb: 255,65,54;
+--bs-btn-active-color: #fff;
+--bs-btn-active-bg: #FD45C5;
+--bs-btn-active-border-color: #FD45C5;
+--bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+--bs-btn-disabled-color: #FD45C5;
+--bs-btn-disabled-bg: transparent;
+--bs-btn-disabled-border-color: #FD45C5;
+--bs-gradient: none;
+} */

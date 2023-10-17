@@ -1,70 +1,135 @@
 // Liste de mots à deviner
-const words = ["pain", "lait", "fromage", "houmous", "nouilles"];
+const words = ["licorne", "paillettes", "magie", "etoiles", "princesse", "chaton", "mignon"];
+const errorImagesSrc = [
+    "./public/assets/img/image6.png",
+    "./public/assets/img/image5.png",
+    "./public/assets/img/image4.png",
+    "./public/assets/img/image3.png",
+    "./public/assets/img/image2.png",
+    "./public/assets/img/image1.png"
+];
 
-// Je sélectionne un mot aléatoire 
-let secretWord = words[Math.floor(Math.random() * words.length)];
-console.log("mot:", secretWord);
-
-// Je décompose mon mot sélectionné, en lettre séparée dans un tableau
-let guessWord = secretWord.split('').fill("_");
-console.log(`mot à deviner : ${guessWord}`);
+// Éléments HTML
+const guessInput = document.getElementById("letter-input");
 const guessAff = document.getElementById("guess-word");
-        guessAff.innerHTML = guessWord;
+const secretLose = document.getElementById("word-secret");
+const countElement = document.getElementById("count");
+const letterErreur = document.getElementById('letterErreur');
+const errorImage = document.getElementById("error-img");
 
-let count = 2;
+let datas = JSON.parse(localStorage.getItem('victoire')) ?? [];
+let victorys = JSON.parse(localStorage.getItem('victoire'));
 
-const resetGame = () => {
-    let secretWord = words[Math.floor(Math.random() * words.length)];
-    let guessWord = secretWord.split('').fill("_");
-    let count = 2;
-}
+// Variables
+let secretWord;
+let guessWord;
+let count;
 
-// Fonction lettre
-const guessLetter = (event) => {
-    // const letter ='o'; // TEST lettre de l'utilisateur 
-    const guessInput = document.getElementById("letter-input");
-    const letter = guessInput.value;
+// Fonction pour choisir un mot aléatoire
+const randomWord = () => {
+    return words[Math.floor(Math.random() * words.length)];
+};
 
-    if (secretWord.includes(letter)) { // Je vérifie si la lettre est présente dans le mot
+// Fonction pour commencer un nouveau jeu
+const newGame = () => {
+    // Sélectionne un mot aléatoire
+    secretWord = randomWord();
+    console.log("Mot à deviner :", secretWord);
+
+    // Initialisation du mot à deviner
+    guessWord = Array(secretWord.length).fill("_");
+    guessAff.innerHTML = guessWord.join(' ');
+
+    // Réinitialisation du compteur
+    count = 6;
+    countElement.innerHTML = count;
+    errorImage.src = './public/assets/img/image-body.png';
+    secretLose.innerHTML = '';
+
+    // Cacher les messages de victoire/défaite
+    document.getElementById("win").classList.add('d-none');
+    document.getElementById("lose").classList.add('d-none');
+    document.getElementById("letterErreur").classList.add('d-none');
+    document.getElementById("letterErreur").innerHTML = '';
+    document.getElementById("formLetter").classList.remove('d-none');      
+};
+
+// Fonction pour gérer la lettre devinée
+const guessLetter = () => {
+    const letter = guessInput.value.toLowerCase(); // Convertir la lettre en minuscules
+
+    if (secretWord.includes(letter)) {
+        // La lettre est présente dans le mot secret
         secretWord.split('').forEach((secretWordLetter, index) => {
             if (secretWordLetter === letter) {
-                guessWord[index] = letter; // Je mets à jour mon tableau si la lettre est identique
-                console.log(`mot à deviner : ${guessWord}`);  
-
-            }
-            if (guessWord.join('') === secretWord) { // je compare si mes mots (tableaux) sont identique
-                console.log('BRAVO !');
-                const win = document.getElementById("win");
-                win.classList.remove('d-none');
-                // guessInput.classList.add('d-none');
-                resetGame() 
+                guessWord[index] = letter;
             }
         });
 
-        const guessAff = document.getElementById("guess-word");
         guessAff.innerHTML = guessWord.join(' ');
-        console.log(`lettre devinée : ${letter}`);
-    }
 
+        if (guessWord.join('') === secretWord) {
+            console.log('BRAVO !');
+            document.getElementById("win").classList.remove('d-none');
+            document.getElementById("formLetter").classList.add('d-none');    
+            errorImage.src = './public/assets/img/image-win.png';
+
+            // LocalStorage
+            const data = {
+                'mot': secretWord,
+            };
+            datas.push(data);
+            localStorage.setItem('victoire', JSON.stringify(datas));
+            display()
+        }
+    } 
     if (!secretWord.includes(letter)) { // Si lettre n'est pas présente dans le mot(tableu), j'enleve 1 point à mon compteur 
-        count--
+        count-- // compteur d'erreur
+        countElement.innerHTML = count;
+
+        // Affichage des mes images à chaque erreur
+        if (count >= 0) {
+            errorImage.src = errorImagesSrc[count]; // compteur d'erreur pour afficher mes images
+        }
+
         console.log(`Erreur : ${letter}`);
-
-        let letterErreur = document.getElementById('letterErreur');
-        letterErreur.classList.remove('d-none');
-        let letterErreurMessage = `${letter} <span class="text-danger">X</span> `;
+        letterErreur.classList.remove('d-none');       
+        let letterErreurMessage = ` ${letter} <i class="bi bi-x-circle-fill"></i>`;
         letterErreur.innerHTML += letterErreurMessage;
-
+        
 
         console.log(`il reste ${count} coups`);
         if ((count === 0)) { // Quand je compteur est à 0, la partie est perdu
-            console.log(`PERDU !`);
-            const loose = document.getElementById("loose");
-            loose.classList.remove('d-none');
-            resetGame()           
+            console.log('PERDU !');
+            document.getElementById("lose").classList.remove('d-none');
+            document.getElementById("formLetter").classList.add('d-none');    
+            secretLose.innerHTML = `le mot était : ${secretWord}`;
         }
     }
+
+    guessInput.value = '';
+};
+
+window.addEventListener("load", () => {
+    newGame();
+    
+});
+
+// Fonction pour afficher mon LocalStorage sur mon HTML
+const display = () => {
+    let listVictory = document.getElementById('victory');
+
+    victorys.forEach(victory => {
+        let name = victory.mot;
+        let victoryElement = `
+            <p class="gluten-400 mb-1">Mot trouvé : ${name}</p>
+        `;
+        listVictory.innerHTML += victoryElement;
+    });
 }
 
+const newGameBtn = document.getElementById("newGameBtn");
+newGameBtn.addEventListener('click', newGame);
+
 const guessBtn = document.getElementById("guess-btn");
-guessBtn.addEventListener('click', guessLetter)
+guessBtn.addEventListener('click', guessLetter);
