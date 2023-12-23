@@ -25,7 +25,19 @@
                 <h2 class="mb-1 mb-md-4 bg-white rounded-3 p-2 p-md-4 gluten-700 text-uppercase h1" id="guess-word">
                     <!-- Affichage du mot à trouver -->
                 </h2>
-                <div id="formLetter" class="row g-1 justify-content-center my-2 my-md-4">
+
+                <div id="keyboard" class="row justify-content-center my-2 my-md-4">
+                    <div class="col-auto">
+                    <button class="btn btn-primary btn-lg letter-btn" data-letter="a">A</button>
+                    </div>
+                    <div class="col-auto">
+                    <button class="btn btn-primary btn-lg letter-btn" data-letter="b">B</button>
+                    </div>
+                    <!-- Ajoutez des boutons pour les autres lettres ici -->
+                </div>
+
+
+                <!-- <div id="formLetter" class="row g-1 justify-content-center my-2 my-md-4">
                     <label for="letter-input" class="form-label text-center h5 gluten-900">Entrer une lettre</label>
                     <div class="col-2">
                         <input type="text" class="form-control form-control-lg border-primary border-2" id="letter-input" maxlength="1">
@@ -33,7 +45,7 @@
                     <div class="col-auto">
                         <button type="submit" id="guess-btn" class="btn btn-primary btn-lg">Valider la lettre</button>
                     </div>
-                </div>
+                </div> -->
                 <!-- Message quand la partie est gagné -->
                 <h3 id="win" class="d-none gluten-900 text-pink h2">Félicitation ! Tu as gagné !</h3>
                 <!-- Message quand la partie est perdu -->
@@ -62,6 +74,6 @@
 <!-- Script JS Bootstrap -->
 <script src="./public/assets/frameworks/bootstrap.min.js"></script>
 <!-- Script JS -->
-<script src="./public/assets/js/script.js"></script>
+<script src="./public/assets/js/script2.js"></script>
 </body>
 </html>

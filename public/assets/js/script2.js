@@ -73,7 +73,6 @@ let secretWord;
 let guessWord;
 let count;
 
-
 // Fonction pour choisir un mot aléatoire
 const randomWord = () => {
     return words[Math.floor(Math.random() * words.length)];
@@ -100,7 +99,7 @@ const newGame = () => {
     document.getElementById("lose").classList.add('d-none');
     document.getElementById("letterErreur").classList.add('d-none');
     document.getElementById("letterErreur").innerHTML = '';
-    document.getElementById("formLetter").classList.remove('d-none');      
+    // document.getElementById("formLetter").classList.remove('d-none');      
 };
 
 // Fonction pour gérer la lettre devinée
@@ -182,8 +181,24 @@ const display = () => {
     });
 };
 
+// Fonction pour gérer le clic sur un bouton de lettre
+const letterButtonClick = (event) => {
+    const letter = event.target.dataset.letter.toLowerCase();
+    guessInput.value = letter;
+    guessLetter();
+};
+
+// Ajouter des écouteurs d'événements pour chaque bouton de lettre
+const letterButtons = document.querySelectorAll('.letter-btn');
+letterButtons.forEach(button => {
+    button.addEventListener('click', letterButtonClick);
+});
+
+console.log(letterButtonClick);
+
 const newGameBtn = document.getElementById("newGameBtn");
 newGameBtn.addEventListener('click', newGame);
 
-const guessBtn = document.getElementById("guess-btn");
-guessBtn.addEventListener('click', guessLetter);
+// const guessBtn = document.getElementById("guess-btn");
+// guessBtn.addEventListener('click', guessLetter);
+
